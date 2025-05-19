@@ -25,14 +25,14 @@ public class CustomerRestController {
         return bankAccountService.searchCustomers("%" + keyword + "%");
     }
 
-    @GetMapping("/customers/{id}")                      
+    @GetMapping("/customers/{id}")
     public CustomerDTO getCustomer(@PathVariable (name = "id") Long customerId) throws CustomerNotFoundException {
         return bankAccountService.getCustomer(customerId);
     }
 
     @PostMapping("/customers")
     public CustomerDTO saveCustomer(@RequestBody CustomerDTO customerDTO) {
-        return bankAccountService.saveCusto                                                         mer(customerDTO);
+        return bankAccountService.saveCustomer(customerDTO);
     }
 
     @PutMapping("/customers/{customerId}")
