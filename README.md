@@ -246,10 +246,6 @@ The project uses the following main dependencies:
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-## 👥 Contributors
-
-- Your Name - Initial work
-
 ## 🙏 Acknowledgments
 
 - Spring Boot team for the excellent framework
