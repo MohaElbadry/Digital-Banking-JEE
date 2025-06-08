@@ -161,11 +161,19 @@ public class BankAccountServiceImpl implements BankAccountService {
     }
 
     @Override
-    public CustomerDTO updateCustomer(CustomerDTO customerDTO) {
-        // Creation d'un client
-        log.info("Saving new Customer");
-        Customer customer = dtoMapper.fromCustomerDTO(customerDTO);
-        Customer savedCustomer = customerRepository.save(customer);
+    public CustomerDTO updateCustomer(CustomerDTO customerDTO) throws CustomerNotFoundException {
+        if (customerDTO.getId() == null) {
+            throw new IllegalArgumentException("Customer ID is required for update");
+        }
+        
+        Customer existingCustomer = customerRepository.findById(customerDTO.getId())
+            .orElseThrow(() -> new CustomerNotFoundException("Customer not found"));
+        
+        // Update existing customer with new data
+        existingCustomer.setName(customerDTO.getName());
+        existingCustomer.setEmail(customerDTO.getEmail());
+        
+        Customer savedCustomer = customerRepository.save(existingCustomer);
         return dtoMapper.fromCustomer(savedCustomer);
     }
 

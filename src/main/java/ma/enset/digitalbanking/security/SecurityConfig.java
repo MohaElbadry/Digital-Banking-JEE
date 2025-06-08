@@ -1,4 +1,3 @@
-
 package ma.enset.digitalbanking.security;
 
 import com.nimbusds.jose.jwk.source.ImmutableSecret;
@@ -75,7 +74,7 @@ public class SecurityConfig {
     @Bean
     JwtDecoder jwtDecoder() {
         //String secretKey="9faa372517ac1d389764739hfs9397365na5783azc083729faa372517ac1d389";
-        SecretKeySpec secretKeySpec = new SecretKeySpec(secretKey.getBytes(), "RSA");
+        SecretKeySpec secretKeySpec = new SecretKeySpec(secretKey.getBytes(), "HmacSHA512");
         return NimbusJwtDecoder.withSecretKey(secretKeySpec).macAlgorithm(MacAlgorithm.HS512).build();
     }
 

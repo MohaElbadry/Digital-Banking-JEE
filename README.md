@@ -68,7 +68,7 @@ The application follows a modern, layered architecture:
 ## 🚀 Getting Started
 
 ### Prerequisites
-- Java 11 or higher
+- Java 21 or higher
 - Maven 3.6 or higher
 - MySQL (optional, can use H2 in-memory database)
 
