@@ -1,157 +1,148 @@
-# Digital Banking Application
+<p align="center">
+  <img src="https://img.icons8.com/?size=100&id=NdeIzskkIm2U&format=png&color=000000" alt="Digital Banking" width="120" height="120">
+</p>
 
-A modern, secure, and feature-rich banking application built with Spring Boot and Angular, providing a comprehensive solution for digital banking operations.
+<h1 align="center">Digital Banking Platform</h1>
 
-## 🌟 Features
+<p align="center">
+  <strong>Modern Banking Solutions</strong><br>
+  A comprehensive financial management system built with Spring Boot
+</p>
 
-### Customer Management
-- Create, update, and delete customer profiles
-- Search customers by name or ID
-- View detailed customer information
+<div align="center">
+  
+  ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.4.5-brightgreen?style=flat-square&logo=spring)
+  ![Java](https://img.shields.io/badge/Java-21+-orange?style=flat-square&logo=java)
+  ![License](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)
+  
+</div>
 
-### Account Management
-- Support for multiple account types (Current and Saving accounts)
-- Create new accounts for existing customers
-- View account details and status
-- Suspend or activate accounts
+---
 
-### Transaction Processing
-- Deposit funds (credit operation)
-- Withdraw funds (debit operation)
-- Transfer between accounts
-- View transaction history with pagination
-- Filter transactions by type, date, or amount
+## Core Features
 
-### Security
-- JWT-based authentication
-- Role-based access control (USER and ADMIN roles)
-- Secure API endpoints
-- Password encryption
+- Secure Authentication System with OAuth2
+- Customer Management
+- Account Operations
+- Transaction Processing
+- Role-Based Access Control
+- RESTful API Documentation with Swagger/OpenAPI
 
-## 🏗️ Architecture
+## Technology Stack
 
-The application follows a modern, layered architecture:
+### Backend Stack
+```yaml
+Runtime: Java 21
+Framework: Spring Boot 3.4.5
+Security: Spring Security + OAuth2 Resource Server
+Database: MySQL / H2
+ORM: Spring Data JPA
+Documentation: SpringDoc OpenAPI 2.1.0
+Build: Maven
+```
 
-### Backend (Spring Boot)
-- **Controller Layer**: REST API endpoints for client interaction
-- **Service Layer**: Business logic implementation
-- **Repository Layer**: Data access using Spring Data JPA
-- **Entity Layer**: JPA entities representing database tables
-- **DTO Layer**: Data Transfer Objects for API communication
-- **Mapper Layer**: Conversion between entities and DTOs
-- **Security Layer**: JWT authentication and authorization
+### Key Dependencies
+```yaml
+Spring Boot Starter:
+  - Web
+  - Data JPA
+  - DevTools
+  - OAuth2 Resource Server
+  - Security Test
+Database:
+  - MySQL Connector
+  - H2 Database
+Tools:
+  - Lombok
+  - SpringDoc OpenAPI
+```
 
-### Database
-- Supports both MySQL for production and H2 for development/testing
-- JPA/Hibernate for ORM
+---
 
-### Frontend (Angular) - Not included in this repository
-- Component-based UI architecture
-- Services for API communication
-- Guards for route protection
-- Interceptors for token management
-
-## 📋 Technical Stack
-
-### Backend
-- **Java 11+**
-- **Spring Boot 2.7.x**
-- **Spring Security** with JWT
-- **Spring Data JPA**
-- **Hibernate**
-- **Maven** for dependency management
-- **MySQL/H2** databases
-
-### API Documentation
-- Swagger UI for API documentation and testing
-
-## 🚀 Getting Started
+## Quick Start Guide
 
 ### Prerequisites
-- Java 21 or higher
-- Maven 3.6 or higher
-- MySQL (optional, can use H2 in-memory database)
+- Java 21
+- Maven 3.6+
+- MySQL (optional, H2 is included for development)
 
-### Configuration
-The application can be configured via `application.properties`:
-
-```properties
-# Application name and port
-spring.application.name=digital-banking
-server.port=8085
-
-# Database Configuration
-# For H2 in-memory database (development/testing)
-spring.datasource.url=jdbc:h2:mem:digital-bank
-spring.h2.console.enabled=true
-
-# For MySQL (production)
-# spring.datasource.url=jdbc:mysql://localhost:3306/digital-banking?createDatabaseIfNotExist=true
-# spring.datasource.username=root
-# spring.datasource.password=
-# spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
-# spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
-
-# JPA/Hibernate settings
-spring.jpa.hibernate.ddl-auto=create-drop
-spring.jpa.show-sql=true
-
-# JWT Secret
-jwt.secret=9faa372517ac1d389764739hfs9397365na5783azc083729faa372517ac1d389
-```
-
-### Running the Application
-
-1. Clone the repository:
+### Setup
 ```bash
+# Clone & Navigate
 git clone https://github.com/yourusername/digital-banking-jee.git
 cd digital-banking-jee
+
+# Run the application
+mvn spring-boot:run
 ```
 
-2. Build the application:
-```bash
-./mvnw clean install
+### Access Points
+| Service | URL | Purpose |
+|---------|-----|---------|
+| Application | http://localhost:8080 | Main Application |
+| H2 Console | http://localhost:8080/h2-console | Database Admin |
+| API Docs | http://localhost:8080/swagger-ui.html | Interactive API |
+
+---
+
+## Project Structure
+```
+src/main/java/ma/enset/digitalbanking/
+├── config/          # Configuration classes
+├── dtos/           # Data Transfer Objects
+├── entities/       # Domain entities
+├── enums/          # Enumeration types
+├── exceptions/     # Custom exceptions
+├── mappers/        # Object mappers
+├── repositories/   # Data access layer
+├── security/       # Security configuration
+├── services/       # Business logic
+└── web/           # REST controllers
 ```
 
-3. Run the application:
-```bash
-./mvnw spring-boot:run
+## API Documentation
+
+### Core Endpoints
+
+#### Authentication APIs
+```http
+POST   /api/auth/login     # User authentication
+POST   /api/auth/logout    # Session termination
+GET    /api/auth/profile   # User profile data
 ```
 
-4. Access the application:
-   - API: http://localhost:8085
-   - H2 Console (if using H2): http://localhost:8085/h2-console
-   - Swagger UI: http://localhost:8085/swagger-ui.html
-
-### Authentication
-
-The application comes with pre-configured users:
-
-**Admin User:**
-- Username: `admin`
-- Password: `12345`
-- Roles: ADMIN, USER
-
-**Regular User:**
-- Username: `user1`
-- Password: `12345`
-- Role: USER
-
-To authenticate, send a POST request to `/auth/login` with username and password parameters.
-
-Example:
-```bash
-curl -X POST "http://localhost:8085/auth/login?username=admin&password=12345"
+#### Customer Management APIs
+```http
+GET    /api/customers              # List all customers
+POST   /api/customers              # Create new customer
+GET    /api/customers/{id}         # Get customer details
+PUT    /api/customers/{id}         # Update customer
+DELETE /api/customers/{id}         # Remove customer
 ```
 
-The response will contain a JWT token to use in subsequent requests:
-```json
-{
-  "access_token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6..."
-}
+#### Account Management APIs
+```http
+GET    /api/accounts               # List all accounts
+POST   /api/accounts               # Create new account
+GET    /api/accounts/{id}          # Account details
+PUT    /api/accounts/{id}          # Update account
+DELETE /api/accounts/{id}          # Close account
 ```
 
-Use this token in the Authorization header for protected endpoints:
+#### Transaction APIs
+```http
+POST   /api/operations/debit       # Debit transaction
+POST   /api/operations/credit      # Credit transaction
+POST   /api/operations/transfer    # Transfer funds
+GET    /api/operations/{id}        # Transaction details
+GET    /api/operations/history     # Transaction history
+```
+
+---
+
+## Configuration
+
+### Environment Variables
 ```bash
 curl -H "Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6..." http://localhost:8085/customers
 ```
@@ -251,3 +242,54 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - Spring Boot team for the excellent framework
 - JHipster for inspiration on project structure
 - All open-source contributors whose libraries made this project possible
+
+# Backend Configuration
+SPRING_PROFILES_ACTIVE=development
+DATABASE_URL=jdbc:h2:mem:banking_db
+JWT_SECRET=your-256-bit-secret-key
+JWT_EXPIRATION=86400000
+```
+
+### Database Configuration
+```yaml
+# application.yml
+spring:
+  datasource:
+    url: jdbc:h2:mem:banking_db
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: 
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+```
+
+---
+
+## Future Roadmap
+
+### Phase 2 - Enhanced Features
+- [ ] Responsive design for Mobile
+- [ ] Analytics dashboard
+- [ ] Multi-currency support
+- [ ] AI-powered Chat-Bot
+
+### Phase 3 - Enterprise Features
+- [ ] Microservices migration
+- [ ] Kubernetes deployment
+- [ ] Third-party integrations
+
+---
+
+<div align="center">
+
+### Star This Project
+
+*If you find this banking platform valuable, please give it a star!*
+
+---
+
+**Digital Banking Platform - Modern Banking Solutions**
+
+</div>
