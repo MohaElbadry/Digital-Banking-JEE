@@ -198,10 +198,10 @@ The project uses the following main dependencies:
 </dependency>
 
 <!-- Spring Boot DevTools -->
-<dependency>
+<dependency>****
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-devtools</artifactId>
-    <scope>runtime</scope>
+    <scope>runtime</scope>********
     <optional>true</optional>
 </dependency>
 ```
@@ -233,23 +233,6 @@ The project uses the following main dependencies:
 - `POST /accounts/credit`: Credit operation
 - `POST /accounts/transfer`: Transfer between accounts
 
-## 📄 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## 🙏 Acknowledgments
-
-- Spring Boot team for the excellent framework
-- JHipster for inspiration on project structure
-- All open-source contributors whose libraries made this project possible
-
-# Backend Configuration
-SPRING_PROFILES_ACTIVE=development
-DATABASE_URL=jdbc:h2:mem:banking_db
-JWT_SECRET=your-256-bit-secret-key
-JWT_EXPIRATION=86400000
-```
-
 ### Database Configuration
 ```yaml
 # application.yml
@@ -259,7 +242,7 @@ spring:
     driver-class-name: org.h2.Driver
     username: sa
     password: 
-  jpa:
+  jpa:<****
     hibernate:
       ddl-auto: create-drop
     show-sql: true
