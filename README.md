@@ -250,35 +250,58 @@ spring:
 ### UML
 ```mermaid
 classDiagram
-    Customer "1" --> "0..*" BankAccount : owns
-    BankAccount "1" --> "0..*" AccountOperation : has
+    class Customer {
+        +Long id
+        +String name
+        +String email
+        +List~BankAccount~ bankAccounts
+    }
+    
+    class BankAccount {
+        +String id
+        +double balance
+        +Date createDate
+        +AccountStatus status
+        +Customer customer
+        +List~AccountOperation~ accountOperations
+    }
+    
+    class CurrentAccount {
+        +double overDraft
+    }
+    
+    class SavingAccount {
+        +double interestRate
+    }
+    
+    class AccountOperation {
+        +Long id
+        +Date operationDate
+        +double amount
+        +OperationType type
+        +BankAccount bankAccount
+        +String description
+    }
+    
+    class OperationType {
+        <<enumeration>>
+        CREDIT
+        DEBIT
+    }
+    
+    class AccountStatus {
+        <<enumeration>>
+        CREATED
+        ACTIVATED
+        SUSPENDED
+    }
+    
+    Customer ||--o{ BankAccount : owns
+    BankAccount ||--o{ AccountOperation : has
     BankAccount <|-- CurrentAccount
     BankAccount <|-- SavingAccount
-
-    class Customer {
-        +id
-        +... // other fields
-    }
-    class BankAccount {
-        +id
-        +balance
-        +status
-        +createdAt
-        +... // other fields
-    }
-    class CurrentAccount {
-        +overdraft
-    }
-    class SavingAccount {
-        +interestRate
-    }
-    class AccountOperation {
-        +id
-        +operationDate
-        +amount
-        +type
-        +... // other fields
-    }
+    AccountOperation --> OperationType
+    BankAccount --> AccountStatus
 ```
 ### Flux 
 
