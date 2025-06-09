@@ -296,8 +296,8 @@ classDiagram
         SUSPENDED
     }
     
-    Customer ||--o{ BankAccount : owns
-    BankAccount ||--o{ AccountOperation : has
+    Customer ||--o{ BankAccount
+    BankAccount ||--o{ AccountOperation
     BankAccount <|-- CurrentAccount
     BankAccount <|-- SavingAccount
     AccountOperation --> OperationType
