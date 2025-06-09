@@ -296,8 +296,8 @@ classDiagram
         SUSPENDED
     }
     
-    Customer ||--o{ BankAccount
-    BankAccount ||--o{ AccountOperation
+    Customer "1" --o "many" BankAccount
+    BankAccount "1" --o "many" AccountOperation
     BankAccount <|-- CurrentAccount
     BankAccount <|-- SavingAccount
     AccountOperation --> OperationType
