@@ -247,6 +247,59 @@ spring:
       ddl-auto: create-drop
     show-sql: true
 ```
+### UML
+```mermaid
+classDiagram
+    Customer "1" --> "0..*" BankAccount : owns
+    BankAccount "1" --> "0..*" AccountOperation : has
+    BankAccount <|-- CurrentAccount
+    BankAccount <|-- SavingAccount
+
+    class Customer {
+        +id
+        +... // other fields
+    }
+    class BankAccount {
+        +id
+        +balance
+        +status
+        +createdAt
+        +... // other fields
+    }
+    class CurrentAccount {
+        +overdraft
+    }
+    class SavingAccount {
+        +interestRate
+    }
+    class AccountOperation {
+        +id
+        +operationDate
+        +amount
+        +type
+        +... // other fields
+    }
+```
+### Flux 
+
+```mermaid
+sequenceDiagram
+    participant U as Utilisateur
+    participant F as Frontend
+    participant B as Backend
+    participant DB as Database
+
+    U->>F: Saisie login/password
+    F->>F: Validation formulaire
+    F->>B: POST /auth/login
+    B->>DB: Vérification credentials
+    DB-->>B: Utilisateur trouvé
+    B->>B: Génération JWT token
+    B-->>F: Token + rôles
+    F->>F: Stockage token
+    F->>F: Redirection dashboard
+    F->>U: Interface selon rôle
+```
 
 ---
 
